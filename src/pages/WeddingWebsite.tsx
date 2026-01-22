@@ -29,7 +29,6 @@ const WeddingWebsite: React.FC = () => {
       <main>
         <HeroSection />
         <CountdownTimer />
-        {/* <StorySection /> */}
         <FamilySection />
         <LocationSection />
         <ItinerarySection />

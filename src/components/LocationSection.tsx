@@ -46,7 +46,7 @@ const LocationSection: React.FC = () => {
   };
 
   return (
-    <section id="location" className="py-16 px-4 bg-sage-light">
+    <section id="location" className="py-12 px-4 bg-sage-light">
       <div className="max-w-6xl mx-auto">
         {/* Encabezado */}
         <div className="text-center mb-16">
@@ -58,7 +58,6 @@ const LocationSection: React.FC = () => {
             </div>
           </div>
           <h2 className="font-playfair text-4xl text-sage-dark mb-4">Nuestros Lugares Especiales</h2>
-          <div className="w-24 h-1 bg-sage mx-auto mb-6"></div>
           <p className="font-montserrat text-xl text-sage-dark max-w-3xl mx-auto">
             Hemos elegido dos lugares significativos en Irapuato para celebrar cada momento de nuestro amor
           </p>
