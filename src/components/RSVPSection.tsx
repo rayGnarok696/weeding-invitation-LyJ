@@ -187,7 +187,7 @@ const RSVPSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    const phoneNumber = "525512345678";
+                    const phoneNumber = "524622462457";
                     const message = "¡Hola Luli y Juan! Quiero confirmar mi asistencia a su boda.";
                     window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
                   }}
