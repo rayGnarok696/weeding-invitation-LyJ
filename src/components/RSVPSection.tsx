@@ -1,11 +1,10 @@
 // components/RSVPSection.tsx - Versión corregida
 import React, { useState } from 'react';
-import { Users, Phone, MessageCircle } from 'lucide-react';
+import { Users, MessageCircle } from 'lucide-react';
 
 // Definir tipo para formData
 interface RSVPFormData {
   name: string;
-  phone: string;
   guests: string;
   attendance: 'yes' | 'no';
   message: string;
@@ -14,7 +13,6 @@ interface RSVPFormData {
 const RSVPSection: React.FC = () => {
   const [formData, setFormData] = useState<RSVPFormData>({
     name: '',
-    phone: '',
     guests: '1',
     attendance: 'yes',
     message: '',
@@ -48,7 +46,6 @@ const RSVPSection: React.FC = () => {
     // Reiniciar formulario
     setFormData({
       name: '',
-      phone: '',
       guests: '1',
       attendance: 'yes',
       message: '',
@@ -107,23 +104,6 @@ const RSVPSection: React.FC = () => {
                   />
                 </div>
                 
-                {/* Teléfono */}
-                <div>
-                  <label className="block font-montserrat text-sage-dark mb-2">Teléfono *</label>
-                  <div className="relative">
-                    <Phone className="absolute left-3 top-3 w-5 h-5 text-sage/50" />
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      required
-                      className="w-full pl-10 pr-4 py-3 rounded-lg border border-sage/30 focus:border-sage focus:outline-none font-montserrat"
-                      placeholder="55 1234 5678"
-                    />
-                  </div>
-                </div>
-
                 {/* Número de invitados */}
                 <div>
                   <label className="block font-montserrat text-sage-dark mb-2">Número de invitados *</label>
