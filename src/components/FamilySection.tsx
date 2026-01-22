@@ -77,7 +77,7 @@ const FamilySection: React.FC = () => {
                         <Users className="w-10 h-10 text-sage-dark mr-3" />
                         <h2 className="font-playfair text-4xl text-sage-dark">Nuestras Familias</h2>
                     </div>
-                    <div className="w-24 h-1 bg-sage mx-auto mb-6"></div>
+                    {/* <div className="w-24 h-1 bg-sage mx-auto mb-6"></div> */}
                     <p className="font-montserrat text-xl text-sage-dark max-w-3xl mx-auto">
                         Con el amor y bendición de nuestras familias, y el apoyo especial de
                         nuestros padrinos y testigos en este día tan importante.
@@ -104,7 +104,7 @@ const FamilySection: React.FC = () => {
                             <div className="space-y-8">
                                 {parents.bride.map((parent, index) => (
                                     <div key={index} className="flex items-start space-x-4">
-                                        <div className="shrink-0 w-16 h-16 rounded-full bg-gradient from-sage/20 to-sage-light flex items-center justify-center">
+                                        <div className="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-sage/20 to-sage-light flex items-center justify-center">
                                             {/* Icono condicional: Cruz para padre, Corazón para madre */}
                                             {parent.isMother ? (
                                                 <Heart className="w-6 h-6 text-sage-dark" />
@@ -135,7 +135,7 @@ const FamilySection: React.FC = () => {
                             <div className="space-y-8">
                                 {parents.groom.map((parent, index) => (
                                     <div key={index} className="flex items-start space-x-4">
-                                        <div className="shrink-0 w-16 h-16 rounded-full bg-gradient from-sage/20 to-sage-light flex items-center justify-center">
+                                        <div className="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-sage/20 to-sage-light flex items-center justify-center">
                                             {/* Icono condicional: Cruz para padre, Corazón para madre */}
                                             {parent.isMother ? (
                                                 <Cross className="w-6 h-6 text-sage-dark" />
@@ -156,7 +156,7 @@ const FamilySection: React.FC = () => {
                 </div>
 
                 {/* Sección de Padrinos */}
-                <div className="mb-20">
+                <div className="mb-6">
                     <div className="text-center mb-12">
                         <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-sage text-cream mb-6">
                             <Gem className="w-10 h-10" />
@@ -192,10 +192,10 @@ const FamilySection: React.FC = () => {
                 </div>
 
                 {/* Sección de Testigos */}
-                <div className="bg-gradient from-sage/10 to-sage-light/10 rounded-2xl p-8">
+                <div className="bg-gradient-to-r from-sage/10 to-sage-light/10 rounded-2xl p-8">
 
                     {/* Mensaje especial */}
-                    <div className="mt-12 text-center max-w-3xl mx-auto">
+                    <div className="mt-2 text-center max-w-3xl mx-auto">
                         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-sage text-cream mb-4">
                             <Heart className="w-8 h-8" />
                         </div>
@@ -218,7 +218,7 @@ const FamilySection: React.FC = () => {
                                     alt={`Momento familiar ${index + 1}`}
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                 />
-                                <div className="absolute inset-0 bg-gradient from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
                         ))}
                     </div>
