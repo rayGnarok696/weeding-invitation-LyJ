@@ -204,7 +204,7 @@ const ItinerarySection: React.FC = () => {
         </div>
 
         {/* Nota al pie */}
-        <div className="text-center mt-12 md:mt-16 pt-6 md:pt-8 border-t border-sage/20">
+        <div className="text-center mt-6 md:mt-16 pt-6 md:pt-8 border-sage/20">
           <p className="font-montserrat text-sage-dark/70 italic max-w-2xl mx-auto text-sm md:text-base px-4">
             "El amor no tiene horario, pero nuestra celebración sí. 
             Te esperamos para compartir cada momento especial juntos."
