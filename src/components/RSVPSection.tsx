@@ -37,7 +37,7 @@ const RSVPSection: React.FC = () => {
     ${formData.message ? `- Mensaje: ${formData.message}` : ''}`;
     
     const encodedMessage = encodeURIComponent(message);
-    const whatsappURL = `https://wa.me/525512345678?text=${encodedMessage}`;
+    const whatsappURL = `https://wa.me/524622462457?text=${encodedMessage}`;
     
     // Abrir WhatsApp
     window.open(whatsappURL, '_blank');
