@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import photo1 from "../assets/top/1.jpg";
 import photo2 from "../assets/top/5.jpg";
-import photo3 from "../assets/top/joke.jpg";
+import photo3 from "../assets/top/2.jpg";
 
 const HeroSection: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
