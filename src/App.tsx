@@ -2,7 +2,7 @@
 //import { Heart, Clock, MapPin, Calendar, Users, MessageCircle } from 'lucide-react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import WeddingWebsite from '../src/pages/WeddingWebsite';
-import WelcomePage from '../src/pages/welcomePage'
+import WelcomePage from '../src/pages/WelcomePage'
 import type { FC } from 'react'
 
 function App() {
