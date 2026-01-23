@@ -7,6 +7,12 @@ export default {
   theme: {
     extend: {
       colors: {
+        beige: {
+          50: '#f9f3e9',
+          100: '#f5ede4',
+          200: '#e8dfd8',
+          300: '#d4c9b8',
+        },
         'sage': '#87A96B',
         'sage-dark': '#6B8E4E',
         'sage-light': '#C1D8A9',
@@ -15,6 +21,7 @@ export default {
       fontFamily: {
         'playfair': ['Playfair Display', 'serif'],
         'montserrat': ['Montserrat', 'sans-serif'],
+        'serif': ['Georgia', 'Times New Roman', 'serif'],
       },
     },
   },

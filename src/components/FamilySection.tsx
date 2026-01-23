@@ -2,12 +2,10 @@
 import React from 'react';
 import { Users, Gem, Heart, Cross, Crown, Sparkles } from 'lucide-react'; // Importar Cross
 import photo1 from "../assets/family/6.jpg";
-import photo2 from "../assets/family/7.jpg";
-import photo3 from "../assets/family/8.jpg";
 import photo4 from "../assets/family/9.jpg";
 
 const FamilySection: React.FC = () => {
-    const familyPhotos = [photo1, photo2, photo3, photo4];
+    const familyPhotos = [photo1, photo4];
 
     // Datos de los padres - ahora podemos identificar quién es madre y quién es padre
     const parents = {
@@ -49,22 +47,14 @@ const FamilySection: React.FC = () => {
             description: "Nuestro ejemplo, nos han guiado en el amor y la fe",
         },
         {
-            name: "Chiki",
-            role: "Madrina de anillos",
-            description: "Hermana de Luli",
-            special: "Encargada de los anillos de compromiso"
-        },
+            name: "Marisol y Diego",
+            role: "Padrinos de anillos",
+            description: "Encargados de los anillos de compromiso",
+        },        
         {
-            name: "Juan",
-            role: "Padrino de lazo",
-            description: "Hermano de Luli",
-            special: "Simbolizará nuestra unión con el lazo"
-        },
-        {
-            name: "Tito",
-            role: "Hermano amado",
-            description: "Pareja emblemática de nuestra familia",
-            special: "Proveerá las monedas de la prosperidad"
+            name: "Marifer",
+            role: "Madrina de Arras",
+            description: "Proveerá las monedas de la prosperidad",
         }
     ];
 
@@ -180,10 +170,7 @@ const FamilySection: React.FC = () => {
                                     </div>
 
                                     <div className="text-center">
-                                        <p className="font-montserrat text-sage-dark mb-3">{godparent.description}</p>
-                                        <div className="inline-block px-3 py-1 bg-sage-light/50 rounded-full">
-                                            <p className="font-montserrat text-sm text-sage-dark">{godparent.special}</p>
-                                        </div>
+                                        <p className="font-montserrat text-sage-dark mb-3">{godparent.description}</p>                                        
                                     </div>
                                 </div>
                             </div>

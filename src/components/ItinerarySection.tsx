@@ -1,6 +1,6 @@
 // components/ItinerarySection.tsx
 import React from 'react';
-import { Calendar, Utensils, GlassWater, Church, MapPin, PartyPopper } from 'lucide-react';
+import { Calendar, Church, MapPin, PartyPopper, CameraIcon, DoorOpen, HandCoins, Users2Icon } from 'lucide-react';
 
 const ItinerarySection: React.FC = () => {
   const events = [
@@ -15,49 +15,45 @@ const ItinerarySection: React.FC = () => {
     },
     { 
       time: "3:30 PM", 
-      title: "Recepción", 
-      subtitle: "Barda Villa victoria",
-      icon: <GlassWater className="w-6 h-6" />,
-      description: "Brindis y aperitivos acompañados de buena música",
+      title: "Sesión de fotos", 
+      subtitle: "Estudio fotográfico",
+      icon: <CameraIcon className="w-6 h-6" />,
+      
+    },
+    { 
+      time: "4:00 PM", 
+      title: "Llegada a la barda", 
+      icon: <DoorOpen className="w-6 h-6" />,
       color: "bg-sage-light/20",
       borderColor: "border-sage-light"
     },
     { 
-      time: "5:00 PM", 
-      title: "Banquete", 
-      subtitle: "Salón Principal",
-      icon: <Utensils className="w-6 h-6" />,
+      time: "4:30 PM", 
+      title: "Comida", 
+      subtitle: "TACOS",
+      icon: <HandCoins className="w-6 h-6" />,
       description: "Acompañanos a la comida con todos nuestros seres queridos",
       color: "bg-sage/20",
       borderColor: "border-sage"
     },
     { 
-      time: "7:00 PM", 
-      title: "Fiesta", 
+      time: "6:00 PM", 
+      title: "Bals", 
+      subtitle: "Pista de Baile",
+      icon: <Users2Icon className="w-6 h-6" />,
+      description: "Acompañanos en este hermoso bals",
+      color: "bg-sage-light/20",
+      borderColor: "border-sage-light"
+    },
+    { 
+      time: "7:30 PM", 
+      title: "Baile", 
       subtitle: "Pista de Baile",
       icon: <PartyPopper className="w-6 h-6" />,
       description: "Música, baile y celebración hasta la madrugada",
       color: "bg-sage-light/20",
       borderColor: "border-sage-light"
     }
-  ];
-
-  const additionalInfo = [
-    {
-      title: "Dress Code",
-      description: "Libre. Sientete libre de vestirte como quieras.",
-      icon: "👔"
-    },
-    {
-      title: "Confirmación",
-      description: "Por favor confirma tu asistencia antes del 10 de Febrero.",
-      icon: "📋"
-    },
-    {
-      title: "Regalos",
-      description: "Tu presencia es nuestro mejor regalo.",
-      icon: "🎁"
-    },
   ];
 
   return (
@@ -178,26 +174,6 @@ const ItinerarySection: React.FC = () => {
                     {/* Ya se muestra en el lado izquierdo */}
                   </div>
                 )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Información adicional en cuadrícula */}
-        <div className="bg-gradient-to-br from-sage/5 to-sage-light/5 rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-12 border border-sage/20">
-          <h3 className="font-playfair text-2xl md:text-3xl text-sage-dark text-center mb-8 md:mb-12">
-            Detalles Importantes
-          </h3>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {additionalInfo.map((item, index) => (
-              <div 
-                key={index} 
-                className="bg-cream/80 backdrop-blur-sm rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg border border-sage/10 hover:border-sage/30 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-              >
-                <div className="text-2xl md:text-3xl mb-3 md:mb-4">{item.icon}</div>
-                <h4 className="font-playfair text-lg md:text-xl text-sage-dark mb-2 md:mb-3">{item.title}</h4>
-                <p className="font-montserrat text-xs md:text-sm text-sage-dark/80">{item.description}</p>
               </div>
             ))}
           </div>

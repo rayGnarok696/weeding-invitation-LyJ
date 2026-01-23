@@ -1,9 +1,7 @@
-// src/pages/WeddingWebsite.tsx
 import React, { useState, useEffect } from 'react';
 import { Heart } from 'lucide-react'; // Importación necesaria
 import HeroSection from '../components/HeroSection';
 import CountdownTimer from '../components/CountdownTimer';
-//import StorySection from '../components/StorySection';
 import FamilySection from '../components/FamilySection';
 import LocationSection from '../components/LocationSection';
 import ItinerarySection from '../components/ItinerarySection';

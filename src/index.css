@@ -53,3 +53,25 @@ body {
 .border-sage {
   border-color: var(--sage);
 }
+
+
+@layer utilities {
+  .clip-triangle {
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+  }
+}
+
+/* Efectos adicionales */
+.envelope-shadow {
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+}
+
+/* Animaciones personalizadas */
+@keyframes seal-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.animate-seal-pulse {
+  animation: seal-pulse 2s infinite;
+}
