@@ -41,11 +41,10 @@ const HeroSection: React.FC = () => {
         {slides.map((slide, index) => (
           <div
             key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide ? "opacity-100" : "opacity-0"
-            }`}
+            className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? "opacity-100" : "opacity-0"
+              }`}
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/10 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-b from-red-900/30 to-red-800/10 z-10" />
             <img
               src={slide.image}
               alt={slide.alt}
@@ -61,23 +60,44 @@ const HeroSection: React.FC = () => {
       </div>
 
       {/* Contenido */}
-      <div className="relative z-10 text-center text-cream px-4">
-        <h1 className="font-playfair text-5xl md:text-7xl mb-4">
-          Lourdes & Juan
-        </h1>
-
-        <div className="flex items-center justify-center mb-6">
-          <div className="w-24 h-px bg-cream/70" />
-          <span className="font-montserrat mx-4 text-xl">Se casan</span>
-          <div className="w-24 h-px bg-cream/70" />
+      <div className="relative z-10 w-full px-4">
+        {/* Nombre de los novios en la parte superior */}
+        <div className="text-center pt-8 md:pt-12">
+          <div className="text-5xl md:text-7xl mb-50 text-amber-50 great-vibes-regular leading-tight">
+            Lourdes & Juan
+          </div>
         </div>
 
-        <h2 className="font-playfair text-3xl md:text-4xl mb-2">
-          14 de Febrero, 2026
-        </h2>
-        <p className="font-montserrat text-xl md:text-2xl">
-          ¡Save the Date!
-        </p>
+        {/* Contenido centrado */}
+        <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-lg">
+          {/* Tarjeta con fondo semitransparente */}
+          <div className="bg-black/10 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-white/20">
+            {/* Líneas decorativas */}
+            <div className="flex items-center justify-center mb-6">
+              <div className="w-16 h-0.5 bg-white/60" />
+              <div className="mx-4">
+                <span className="font-mandarine text-2xl md:text-3xl text-amber-50 italic">
+                  Nuestra Boda
+                </span>
+              </div>
+              <div className="w-16 h-0.5 bg-white/60" />
+            </div>
+
+            {/* Fecha */}
+            <div className="mb-6">
+              <h2 className="font-playfair text-3xl md:text-4xl text-amber-50 text-center font-semibold">
+                14 de Febrero, 2026
+              </h2>
+            </div>
+
+            {/* Texto pequeño */}
+            <div>
+              <p className="font-montserrat text-sm md:text-base text-white/90 text-center uppercase tracking-widest">
+                ¡guarda la fecha!
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

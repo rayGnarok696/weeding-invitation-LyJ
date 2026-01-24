@@ -15,10 +15,10 @@ const AudioControl: React.FC<Props> = ({ isPlaying, onToggle }) => {
         flex items-center justify-center
         w-14 h-14
         rounded-full
-        bg-cream/30 backdrop-blur
-        hover:bg-cream/50
+        bg-beige/30 backdrop-blur
+        hover:bg-beige/50
         transition-all
-        text-sage-dark
+        text-red-700
         shadow-lg
       "
     >

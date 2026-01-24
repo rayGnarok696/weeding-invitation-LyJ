@@ -21,7 +21,7 @@ const WeddingWebsite: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-cream text-sage-dark">
+    <div className="min-h-screen bg-beige text-red-800">
       <Navigation isScrolled={isScrolled} />
       
       <main>
@@ -33,12 +33,12 @@ const WeddingWebsite: React.FC = () => {
         <RSVPSection />
       </main>
 
-      <footer className="bg-sage-dark text-cream py-8 px-4">
+      <footer className="bg-beige text-red-800 py-8 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <div className="flex justify-center items-center mb-4">
-            <Heart className="w-6 h-6 fill-cream mr-2" />
+            <Heart className="w-6 h-6 fill-beige mr-2" />
             <h3 className="font-playfair text-2xl">Luli & Juan</h3>
-            <Heart className="w-6 h-6 fill-cream ml-2" />
+            <Heart className="w-6 h-6 fill-beige ml-2" />
           </div>
           <p className="font-montserrat text-sm">Con la bendición de nuestras familias</p>
           <p className="font-montserrat text-xs mt-4">© {new Date().getFullYear()} - Todos los derechos reservados</p>
