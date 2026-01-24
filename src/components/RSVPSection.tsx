@@ -27,22 +27,22 @@ const RSVPSection: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Crear mensaje de WhatsApp - CORREGIDO: formData.attendance en lugar de formData.attention
     const message = `¡Hola Luli y Juan! Soy ${formData.name}. Confirmo mi asistencia a su boda:
     - Asistencia: ${formData.attendance === 'yes' ? 'Sí asistiré' : 'No podré asistir'}
     - Número de invitados: ${formData.guests}
     ${formData.message ? `- Mensaje: ${formData.message}` : ''}`;
-    
+
     const encodedMessage = encodeURIComponent(message);
     const whatsappURL = `https://wa.me/524622462457?text=${encodedMessage}`;
-    
+
     // Abrir WhatsApp
     window.open(whatsappURL, '_blank');
-    
+
     // Mostrar confirmación
     setSubmitted(true);
-    
+
     // Reiniciar formulario
     setFormData({
       name: '',
@@ -50,7 +50,7 @@ const RSVPSection: React.FC = () => {
       attendance: 'yes',
       message: '',
     });
-    
+
     // Ocultar confirmación después de 5 segundos
     setTimeout(() => setSubmitted(false), 5000);
   };
@@ -83,7 +83,7 @@ const RSVPSection: React.FC = () => {
                 Hemos recibido tu confirmación. Te esperamos con mucha ilusión en nuestra boda.
               </p>
               <p className="font-montserrat text-sage-dark mt-4">
-                Si no se abrió WhatsApp automáticamente, puedes enviar tu mensaje manualmente al: 
+                Si no se abrió WhatsApp automáticamente, puedes enviar tu mensaje manualmente al:
                 <a href="https://wa.me/524622462457" className="text-sage hover:underline ml-1">55 462 2462457</a>
               </p>
             </div>
@@ -103,7 +103,7 @@ const RSVPSection: React.FC = () => {
                     placeholder="Tu nombre y apellido"
                   />
                 </div>
-                
+
                 {/* Número de invitados */}
                 <div>
                   <label className="block font-montserrat text-sage-dark mb-2">Número de invitados *</label>
@@ -163,7 +163,7 @@ const RSVPSection: React.FC = () => {
                   <MessageCircle className="w-5 h-5 mr-2" />
                   Enviar por WhatsApp
                 </button>
-                
+
                 <button
                   type="button"
                   onClick={() => {
@@ -180,16 +180,7 @@ const RSVPSection: React.FC = () => {
           )}
         </div>
 
-        {/* Información de contacto adicional */}
-        <div className="mt-6 grid md:grid-cols-3 gap-6">          
-          <div className="bg-cream p-6 rounded-xl shadow-lg text-center">
-            <h4 className="font-playfair text-xl text-sage-dark mb-3">Fecha límite</h4>
-            <p className="font-montserrat text-sage-dark">5 de Febrero, 2026</p>
-            <p className="font-montserrat text-sm text-sage-dark mt-2">
-              Por favor confirma antes de esta fecha
-            </p>
-          </div>
-        </div>
+
       </div>
     </section>
   );

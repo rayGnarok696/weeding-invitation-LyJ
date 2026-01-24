@@ -1,26 +1,121 @@
 // components/FamilySection.tsx
-import React from 'react';
-import { Users, Gem, Heart, Cross, Crown, Sparkles } from 'lucide-react'; // Importar Cross
+import React, { useState, useRef } from 'react';
+import {
+    Users,
+    Heart,
+    Cross,
+    Crown,
+    Sparkles,
+    ChevronLeft,
+    ChevronRight
+} from 'lucide-react';
+
 import photo1 from "../assets/family/6.jpg";
 import photo4 from "../assets/family/9.jpg";
+
+/* ======================================================
+Carrusel familiar (mobile-first, táctil)
+====================================================== */
+
+interface FamilyCarouselProps {
+    photos: string[];
+}
+
+const FamilyCarousel: React.FC<FamilyCarouselProps> = ({ photos }) => {
+    const [current, setCurrent] = useState(0);
+    const touchStartX = useRef<number | null>(null);
+
+    const next = () => setCurrent((prev) => (prev + 1) % photos.length);
+    const prev = () => setCurrent((prev) => (prev - 1 + photos.length) % photos.length);
+
+    const handleTouchStart = (e: React.TouchEvent) => {
+        touchStartX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = (e: React.TouchEvent) => {
+        if (touchStartX.current === null) return;
+
+        const diff = touchStartX.current - e.changedTouches[0].clientX;
+
+        if (diff > 50) next();
+        if (diff < -50) prev();
+
+        touchStartX.current = null;
+    };
+
+    return (
+        <div
+            className="relative overflow-hidden rounded-2xl shadow-xl bg-black/5"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+        >
+            {/* Slides */}
+            <div
+                className="flex transition-transform duration-500"
+                style={{ transform: `translateX(-${current * 100}%)` }}
+            >
+                {photos.map((photo, index) => (
+                    <div
+                        key={index}
+                        className="min-w-full flex items-center justify-center bg-black"
+                    >
+                        <img
+                            src={photo}
+                            alt={`Familia ${index + 1}`}
+                            className="w-full h-[320px] md:h-[480px] object-contain"
+                        />
+                    </div>
+                ))}
+            </div>
+
+            {/* Controles desktop */}
+            <button
+                onClick={prev}
+                className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-sage-dark rounded-full p-2 shadow"
+            >
+                <ChevronLeft />
+            </button>
+
+            <button
+                onClick={next}
+                className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-sage-dark rounded-full p-2 shadow"
+            >
+                <ChevronRight />
+            </button>
+
+            {/* Indicadores */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+                {photos.map((_, index) => (
+                    <span
+                        key={index}
+                        className={`w-2.5 h-2.5 rounded-full transition-all ${index === current ? 'bg-white' : 'bg-white/50'
+                            }`}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+};
+/* ======================================================
+   Sección principal
+====================================================== */
 
 const FamilySection: React.FC = () => {
     const familyPhotos = [photo1, photo4];
 
-    // Datos de los padres - ahora podemos identificar quién es madre y quién es padre
     const parents = {
         bride: [
             {
                 name: "Ma. Elena Villaseñor",
                 role: "Madre de la novia",
                 quote: "Mi niña siempre soñó con este día.",
-                isMother: true // Nueva propiedad para identificar
+                isMother: true
             },
             {
                 name: "Alejandro Rivera",
                 role: "Padre de la novia",
                 quote: "Hija mía, camina hacia este nuevo amor con la frente en alto; mi orgullo y mi bendición te acompañan siempre.",
-                isMother: false // Nueva propiedad para identificar
+                isMother: false
             }
         ],
         groom: [
@@ -39,180 +134,108 @@ const FamilySection: React.FC = () => {
         ]
     };
 
-    // Datos de los padrinos
     const godparents = [
         {
             name: "Adolfo Rivera y Pilar Gutierrez",
             role: "Padrinos de velación",
-            description: "Nuestro ejemplo, nos han guiado en el amor y la fe",
+            description: "Nuestro ejemplo, nos han guiado en el amor y la fe"
         },
         {
             name: "Marisol y Diego",
             role: "Padrinos de anillos",
-            description: "Encargados de los anillos de compromiso",
-        },        
+            description: "Encargados de los anillos de compromiso"
+        },
         {
             name: "Marifer",
             role: "Madrina de Arras",
-            description: "Proveerá las monedas de la prosperidad",
+            description: "Proveerá las monedas de la prosperidad"
         }
     ];
 
     return (
         <section id="family" className="py-16 px-4 bg-sage-light">
             <div className="max-w-6xl mx-auto">
+
                 {/* Encabezado */}
                 <div className="text-center mb-16">
                     <div className="flex justify-center items-center mb-6">
                         <Users className="w-10 h-10 text-sage-dark mr-3" />
-                        <h2 className="font-playfair text-4xl text-sage-dark">Nuestras Familias</h2>
+                        <h2 className="font-playfair text-4xl text-sage-dark">
+                            Nuestras Familias
+                        </h2>
                     </div>
-                    {/* <div className="w-24 h-1 bg-sage mx-auto mb-6"></div> */}
                     <p className="font-montserrat text-xl text-sage-dark max-w-3xl mx-auto">
                         Con el amor y bendición de nuestras familias, y el apoyo especial de
-                        nuestros padrinos y testigos en este día tan importante.
+                        nuestros padrinos en este día tan importante.
                     </p>
                 </div>
 
-                {/* Sección de Padres - VERSIÓN CORREGIDA */}
-                <div className="mb-20">
-                    <h3 className="font-playfair text-3xl text-sage-dark text-center mb-12">
-                        Con el amor de nuestros padres
+                {/* Padres */}
+                <div className="grid md:grid-cols-2 gap-12 mb-20">
+                    {[parents.bride, parents.groom].map((group, i) => (
+                        <div key={i} className="bg-cream rounded-2xl shadow-xl p-8">
+                            <div className="text-center mb-8">
+                                <div className="inline-flex w-16 h-16 items-center justify-center rounded-full bg-sage text-cream mb-4">
+                                    {i === 0 ? <Sparkles /> : <Crown />}
+                                </div>
+                                <h4 className="font-playfair text-2xl text-sage-dark">
+                                    {i === 0 ? "Familia de Luli" : "Familia de Juan"}
+                                </h4>
+                            </div>
+
+                            <div className="space-y-8">
+                                {group.map((parent, index) => (
+                                    <div key={index} className="flex space-x-4">
+                                        <div className="w-16 h-16 rounded-full bg-sage/20 flex items-center justify-center">
+                                            {parent.isMother
+                                                ? <Heart className="text-sage-dark" />
+                                                : <Cross className="text-sage-dark" />
+                                            }
+                                        </div>
+                                        <div>
+                                            <h5 className="font-playfair text-xl text-sage-dark">
+                                                {parent.name}
+                                            </h5>
+                                            <p className="font-montserrat font-semibold text-sage">
+                                                {parent.role}
+                                            </p>
+                                            <p className="italic text-sage-dark">
+                                                "{parent.quote}"
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Padrinos */}
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+                    {godparents.map((g, i) => (
+                        <div key={i} className="bg-white rounded-xl shadow-lg p-6 text-center">
+                            <Heart className="mx-auto mb-3 text-sage-dark" />
+                            <h4 className="font-playfair text-xl text-sage-dark">{g.name}</h4>
+                            <p className="font-semibold text-sage">{g.role}</p>
+                            <p className="text-sage-dark mt-2">{g.description}</p>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Galería */}
+                <div className="mt-20">
+                    <h3 className="font-playfair text-3xl text-sage-dark text-center mb-8">
+                        Momentos Familiares
                     </h3>
-
-                    <div className="grid md:grid-cols-2 gap-12">
-                        {/* Padres de la novia - CORREGIDO */}
-                        <div className="bg-cream rounded-2xl shadow-xl p-8">
-                            <div className="text-center mb-8">
-                                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-sage text-cream mb-4">
-                                    <Sparkles className="w-8 h-8" />
-                                </div>
-                                <h4 className="font-playfair text-2xl text-sage-dark mb-2">Familia de Luli</h4>
-                                <p className="font-montserrat text-sage-dark">Novia</p>
-                            </div>
-
-                            <div className="space-y-8">
-                                {parents.bride.map((parent, index) => (
-                                    <div key={index} className="flex items-start space-x-4">
-                                        <div className="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-sage/20 to-sage-light flex items-center justify-center">
-                                            {/* Icono condicional: Cruz para padre, Corazón para madre */}
-                                            {parent.isMother ? (
-                                                <Heart className="w-6 h-6 text-sage-dark" />
-                                            ) : (
-                                                <Cross className="w-6 h-6 text-sage-dark" />
-                                            )}
-                                        </div>
-                                        <div>
-                                            <h5 className="font-playfair text-xl text-sage-dark">{parent.name}</h5>
-                                            <p className="font-montserrat font-semibold text-sage mb-2">{parent.role}</p>
-                                            <p className="font-montserrat text-sage-dark italic">"{parent.quote}"</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-
-                        {/* Padres del novio - CORREGIDO */}
-                        <div className="bg-cream rounded-2xl shadow-xl p-8">
-                            <div className="text-center mb-8">
-                                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-sage text-cream mb-4">
-                                    <Crown className="w-8 h-8" />
-                                </div>
-                                <h4 className="font-playfair text-2xl text-sage-dark mb-2">Familia de Juan</h4>
-                                <p className="font-montserrat text-sage-dark">Novio</p>
-                            </div>
-
-                            <div className="space-y-8">
-                                {parents.groom.map((parent, index) => (
-                                    <div key={index} className="flex items-start space-x-4">
-                                        <div className="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br from-sage/20 to-sage-light flex items-center justify-center">
-                                            {/* Icono condicional: Cruz para padre, Corazón para madre */}
-                                            {parent.isMother ? (
-                                                <Cross className="w-6 h-6 text-sage-dark" />
-                                            ) : (
-                                                <Heart className="w-6 h-6 text-sage-dark" />
-                                            )}
-                                        </div>
-                                        <div>
-                                            <h5 className="font-playfair text-xl text-sage-dark">{parent.name}</h5>
-                                            <p className="font-montserrat font-semibold text-sage mb-2">{parent.role}</p>
-                                            <p className="font-montserrat text-sage-dark italic">"{parent.quote}"</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                    <div className="max-w-4xl mx-auto">
+                        <FamilyCarousel photos={familyPhotos} />
                     </div>
                 </div>
 
-                {/* Sección de Padrinos */}
-                <div className="mb-6">
-                    <div className="text-center mb-12">
-                        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-sage text-cream mb-6">
-                            <Gem className="w-10 h-10" />
-                        </div>
-                        <h3 className="font-playfair text-3xl text-sage-dark mb-4">Nuestros Padrinos</h3>
-                        <p className="font-montserrat text-xl text-sage-dark max-w-3xl mx-auto">
-                            Personas especiales que nos acompañan y guían en este camino del amor
-                        </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {godparents.map((godparent, index) => (
-                            <div key={index} className="group bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                                <div className="p-6">
-                                    <div className="text-center mb-4">
-                                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-sage-light text-sage-dark mb-3 group-hover:bg-sage group-hover:text-cream transition-colors">
-                                            <Heart className="w-6 h-6" />
-                                        </div>
-                                        <h4 className="font-playfair text-xl text-sage-dark mb-2">{godparent.name}</h4>
-                                        <p className="font-montserrat font-semibold text-sage">{godparent.role}</p>
-                                    </div>
-
-                                    <div className="text-center">
-                                        <p className="font-montserrat text-sage-dark mb-3">{godparent.description}</p>                                        
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Sección de Testigos */}
-                <div className="bg-gradient-to-r from-sage/10 to-sage-light/10 rounded-2xl p-8">
-
-                    {/* Mensaje especial */}
-                    <div className="mt-2 text-center max-w-3xl mx-auto">
-                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-sage text-cream mb-4">
-                            <Heart className="w-8 h-8" />
-                        </div>
-                        <h4 className="font-playfair text-2xl text-sage-dark mb-4">Agradecimiento Especial</h4>
-                        <p className="font-montserrat text-lg text-sage-dark">
-                            Agradecemos profundamente a cada una de estas personas especiales por acompañarnos
-                            en este día tan significativo. Su amor, apoyo y guía son invaluables para nosotros.
-                        </p>
-                    </div>
-                </div>
-
-                {/* Galería familiar */}
-                <div className="mt-16">
-                    <h3 className="font-playfair text-3xl text-sage-dark text-center mb-8">Momentos Familiares</h3>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        {familyPhotos.map((src, index) => (
-                            <div key={index} className="overflow-hidden rounded-lg shadow-md h-48 md:h-64 group relative">
-                                <img
-                                    src={src}
-                                    alt={`Momento familiar ${index + 1}`}
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
             </div>
         </section>
     );
 };
 
 export default FamilySection;
+

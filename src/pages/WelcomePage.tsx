@@ -1,242 +1,160 @@
-// App.tsx
-import { useState } from 'react';
-import { Home, Heart, Mail } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import selloCera from '../assets/sobre/selloCera.png';
+import sobre from '../assets/sobre/sobre.png';
 
 const WelcomePage = () => {
-  const [isSealHovered, setIsSealHovered] = useState(false);
-  const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
-  const [showContent, setShowContent] = useState(false);
+  const navigate = useNavigate();
+  const [isOpened, setIsOpened] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
+
+  // Evitar scroll en la página de inicio
+  useEffect(() => {
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+    const originalBodyOverflow = document.body.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    
+    // Pequeño delay para mostrar el efecto de atenuación
+    setTimeout(() => {
+      setHasLoaded(true);
+    }, 100);
+    
+    return () => {
+      document.documentElement.style.overflow = originalHtmlOverflow;
+      document.body.style.overflow = originalBodyOverflow;
+    };
+  }, []);
 
   const handleSealClick = () => {
-    setIsEnvelopeOpen(true);
-    setTimeout(() => setShowContent(true), 800);
+    setIsOpened(true);
+    setTimeout(() => {
+      handleOpenInvitation();
+    }, 1600);
   };
 
-  const handleGoHome = () => {
-    setShowContent(false);
-    setTimeout(() => setIsEnvelopeOpen(false), 300);
-  };
-
-  // Paleta de colores: beige y rojos
-  const colors = {
-    background: 'bg-[#f8f4e8]',
-    beigeLight: 'bg-[#f9f3e9]',
-    beigeMedium: 'bg-[#e8dfd8]',
-    beigeDark: 'bg-[#d4c9b8]',
-    redLight: 'text-red-300',
-    redMedium: 'text-red-500',
-    redDark: 'text-red-700',
-    redPrimary: 'text-red-600',
-    redHover: 'hover:text-red-800',
-    sealRed: 'bg-gradient-to-br from-red-500 to-red-700',
-    envelopeBeige: 'bg-gradient-to-br from-[#f5ede4] to-[#e8dfd8]'
+  const handleOpenInvitation = () => {
+    navigate('/wedding');
   };
 
   return (
-    <div className={`min-h-screen ${colors.background} transition-colors duration-500 p-4 md:p-8`}>
-      {/* Encabezado */}
-      <header className="max-w-6xl mx-auto mb-8 md:mb-12">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Heart className={`w-6 h-6 ${colors.redMedium}`} />
-            <h1 className="text-2xl md:text-3xl font-serif font-bold text-gray-800">
-              Love Letters
-            </h1>
+    <div 
+      className="min-h-screen flex items-center justify-center p-4 overflow-hidden relative"
+      style={{
+        backgroundImage: 'radial-gradient(circle, #f5f5dc 0%, #e6d8c3 50%, #d8c4a6 100%)', // Fondo beige degradado
+      }}
+    >
+      {/* Fondo floral */}
+      <div 
+        className="absolute inset-0 z-0 opacity-20"
+        style={{
+          backgroundImage: 'url("data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M50 30 Q60 20 70 30 Q80 40 70 50 Q60 60 50 50 Q40 60 30 50 Q20 40 30 30 Q40 20 50 30 Z" fill="%23b22222"%3E%3C/path%3E%3Ccircle cx="50" cy="50" r="10" fill="%23800000"%3E%3C/circle%3E%3Ccircle cx="35" cy="35" r="3" fill="%238B0000"%3E%3C/circle%3E%3Ccircle cx="65" cy="35" r="3" fill="%238B0000"%3E%3C/circle%3E%3Ccircle cx="35" cy="65" r="3" fill="%238B0000"%3E%3C/circle%3E%3Ccircle cx="65" cy="65" r="3" fill="%238B0000"%3E%3C/circle%3E%3C/svg%3E")',
+          backgroundSize: '200px 200px',
+          backgroundPosition: 'center',
+        }}
+      />
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key="envelope"
+          initial={{ opacity: 0 }}
+          animate={{ 
+            opacity: hasLoaded ? 1 : 0,
+            scale: hasLoaded ? 1 : 0.95
+          }}
+          exit={{ scale: 1.1, opacity: 0 }}
+          transition={{ 
+            duration: 0.8, 
+            ease: "easeOut",
+            opacity: { duration: 1.2 } // Transición más suave para la opacidad
+          }}
+          className="relative origin-center scale-100 sm:scale-[1.2] md:scale-[1.5] lg:scale-[2] xl:scale-[3] z-10"
+        >
+          {/* Sobre - Sin movimiento, solo opacidad */}
+          <div className="relative w-95 h-56 mx-auto">
+            <motion.img
+              src={sobre}
+              alt="Sobre"
+              className="w-full h-full object-cover shadow-xl"
+              animate={isOpened ? { opacity: 0 } : { opacity: 1 }}
+              transition={{ duration: 1, ease: "easeInOut" }}
+              style={{
+                filter: 'drop-shadow(2px 4px 6px rgba(139, 0, 0, 0.3))',
+              }}
+            />
           </div>
-          <button
-            onClick={handleGoHome}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg ${colors.beigeMedium} ${colors.redHover} transition-all hover:scale-105`}
-          >
-            <Home className="w-5 h-5" />
-            <span className="hidden md:inline font-medium">Inicio</span>
-          </button>
-        </div>
-        <p className="text-center mt-4 text-gray-600 italic">
-          Descubre mensajes especiales guardados con cariño
-        </p>
-      </header>
-
-      <main className="max-w-6xl mx-auto">
-        {/* Contenedor principal */}
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16">
-          {/* Envelope Container */}
-          <div className="relative w-full max-w-md">
-            {/* Instrucción */}
-            <div className="text-center mb-6">
-              <p className={`text-lg font-medium ${colors.redDark} animate-pulse`}>
-                {isEnvelopeOpen ? '¡Has abierto el sobre!' : 'Haz clic en el sello para abrir'}
-              </p>
-            </div>
-
-            {/* Sobre */}
-            <div className="relative">
-              {/* Parte trasera del sobre */}
-              <div className={`absolute inset-0 ${colors.envelopeBeige} rounded-2xl shadow-xl transform rotate-2 translate-y-2`}></div>
-              
-              {/* Parte frontal del sobre */}
-              <div 
-                className={`relative ${colors.envelopeBeige} rounded-2xl shadow-2xl p-8 transition-all duration-700 ${
-                  isEnvelopeOpen ? 'transform -translate-y-16 opacity-0' : ''
-                }`}
-              >
-                {/* Solapa superior */}
-                <div className={`absolute top-0 left-0 right-0 h-16 ${colors.beigeDark} rounded-t-2xl clip-triangle`}></div>
-                
-                {/* Contenido visible del sobre */}
-                <div className="pt-10">
-                  <div className="flex justify-center mb-6">
-                    <Mail className={`w-16 h-16 ${colors.redMedium} opacity-80`} />
-                  </div>
-                  
-                  <div className="text-center space-y-4">
-                    <h2 className="text-2xl font-bold text-gray-800">Mensaje Secreto</h2>
-                    <p className="text-gray-600">
-                      Un mensaje especial espera ser descubierto dentro de este sobre.
-                    </p>
-                  </div>
-                </div>
-                
-                {/* Sello */}
-                <div className="absolute bottom-6 right-6">
-                  <button
-                    onClick={handleSealClick}
-                    onMouseEnter={() => setIsSealHovered(true)}
-                    onMouseLeave={() => setIsSealHovered(false)}
-                    className={`relative w-20 h-20 rounded-full ${colors.sealRed} shadow-lg transform transition-all duration-300 ${
-                      isSealHovered ? 'scale-110 shadow-2xl' : ''
-                    } active:scale-95 group`}
+          
+          {/* Sello de cera - Modificado con colores rojos */}
+          {!isOpened && (
+            <motion.button
+              onClick={handleSealClick}
+              className="absolute top-[6.5rem] left-1/2 transform -translate-x-1/2 w-20 h-20 rounded-full cursor-pointer z-30"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-auto">
+                {/* Sello con tonos rojos */}
+                <img
+                  src={selloCera}
+                  alt="Sello de cera"
+                  className="w-24 h-24 object-contain"
+                  style={{
+                    filter: 'hue-rotate(-20deg) saturate(1.5) brightness(0.9)',
+                  }}
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div
+                    className="text-white tracking-wider"
+                    style={{
+                      fontFamily: "Great Vibes, cursive",
+                      fontWeight: 400,
+                      fontSize: '1.5rem',
+                      textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+                    }}
                   >
-                    {/* Efecto de brillo */}
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    
-                    {/* Texto del sello */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-white font-bold text-xs tracking-widest rotate-12">
-                        ABRIR
-                      </span>
-                    </div>
-                    
-                    {/* Efecto de cera */}
-                    <div className="absolute inset-4 rounded-full border-2 border-white/30"></div>
-                    
-                    {/* Tooltip */}
-                    <div className={`absolute -top-12 left-1/2 transform -translate-x-1/2 px-3 py-1 rounded-lg ${
-                      colors.beigeMedium
-                    } text-sm font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity`}>
-                      Haz clic para abrir
-                    </div>
-                  </button>
-                </div>
-              </div>
-
-              {/* Contenido que aparece al abrir */}
-              <div className={`transition-all duration-700 ${
-                showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}>
-                {showContent && (
-                  <div className={`relative ${colors.beigeLight} rounded-2xl shadow-2xl p-8`}>
-                    {/* Carta interior */}
-                    <div className="absolute inset-2 bg-white/80 rounded-lg"></div>
-                    
-                    <div className="relative p-6">
-                      <div className="flex items-center justify-center mb-6">
-                        <Heart className={`w-12 h-12 ${colors.redMedium} animate-pulse`} />
-                      </div>
-                      
-                      <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
-                        ¡Bienvenido a Casa!
-                      </h2>
-                      
-                      <div className="space-y-4 text-gray-700">
-                        <p className="text-lg">
-                          Has llegado a tu destino. Este es tu espacio especial, diseñado con cariño 
-                          y atención a cada detalle.
-                        </p>
-                        
-                        <div className={`border-l-4 ${colors.redMedium} pl-4 my-6`}>
-                          <p className="italic">
-                            "Los mejores mensajes son aquellos que se comparten con el corazón"
-                          </p>
-                        </div>
-                        
-                        <p>
-                          Explora, descubre y disfruta de todo lo que tenemos preparado para ti.
-                        </p>
-                      </div>
-                      
-                      <div className="flex justify-center mt-8">
-                        <button
-                          onClick={handleGoHome}
-                          className={`px-8 py-3 rounded-full ${colors.sealRed} text-white font-bold tracking-wider transition-all hover:shadow-xl hover:scale-105 flex items-center gap-2`}
-                        >
-                          <Home className="w-5 h-5" />
-                          Volver al Sobre
-                        </button>
-                      </div>
-                    </div>
+                    L&J
                   </div>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Información adicional */}
-          <div className={`${colors.beigeLight} rounded-2xl p-6 lg:p-8 shadow-lg w-full max-w-md`}>
-            <h3 className={`text-2xl font-bold mb-6 ${colors.redDark} flex items-center gap-2`}>
-              <Mail className="w-6 h-6" />
-              Sobre Esta Página
-            </h3>
-            
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <div className={`w-2 h-2 mt-2 rounded-full ${colors.redMedium}`}></div>
-                <span className="text-gray-700">
-                  Diseñada con <strong>React + TypeScript + Tailwind CSS</strong>
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className={`w-2 h-2 mt-2 rounded-full ${colors.redMedium}`}></div>
-                <span className="text-gray-700">
-                  <strong>Mobile-first</strong> approach para todos los dispositivos
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className={`w-2 h-2 mt-2 rounded-full ${colors.redMedium}`}></div>
-                <span className="text-gray-700">
-                  Colores <strong>beige y rojos</strong> cuidadosamente seleccionados
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className={`w-2 h-2 mt-2 rounded-full ${colors.redMedium}`}></div>
-                <span className="text-gray-700">
-                  Animaciones y transiciones <strong>suaves</strong>
-                </span>
-              </li>
-            </ul>
-            
-            <div className={`mt-8 pt-6 border-t ${colors.beigeMedium}`}>
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <div className={`w-4 h-4 rounded ${colors.redMedium}`}></div>
-                  <span className="text-sm text-gray-600">Rojo principal</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className={`w-4 h-4 rounded ${colors.beigeMedium}`}></div>
-                  <span className="text-sm text-gray-600">Beige complementario</span>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </main>
+              
+              {/* Efecto de brillo sutil en el sello */}
+              <div className="absolute inset-0 rounded-full opacity-30"
+                   style={{
+                     background: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8) 0%, rgba(178,34,34,0.3) 70%)',
+                     mixBlendMode: 'overlay',
+                   }}
+              />
+            </motion.button>
+          )}
+        </motion.div>
+      </AnimatePresence>
 
-      {/* Pie de página */}
-      <footer className="max-w-6xl mx-auto mt-12 md:mt-16 pt-8 border-t border-gray-300">
-        <div className="text-center text-gray-600">
-          <p>© {new Date().getFullYear()} Love Letters. Todos los derechos reservados.</p>
-          <p className="text-sm mt-2">Una experiencia interactiva con React y Tailwind CSS</p>
-        </div>
-      </footer>
+      {/* Texto decorativo */}
+      <div className="absolute bottom-10 left-0 right-0 text-center z-10">
+        <p className="text-amber-900 italic opacity-70"
+           style={{
+             fontFamily: "'Dancing Script', cursive",
+             fontSize: '1.2rem',
+           }}>
+          Haz clic en el sello para abrir la invitación
+        </p>
+      </div>
+
+      {/* Decoración de esquinas */}
+      <div className="absolute top-0 left-0 w-32 h-32 opacity-10">
+        <svg viewBox="0 0 100 100" className="w-full h-full">
+          <path d="M0,0 L100,0 L100,20 Q80,30 60,20 Q40,10 20,20 Q0,30 0,50 Z" 
+                fill="#8B0000"/>
+        </svg>
+      </div>
+      <div className="absolute bottom-0 right-0 w-32 h-32 opacity-10 transform rotate-180">
+        <svg viewBox="0 0 100 100" className="w-full h-full">
+          <path d="M0,0 L100,0 L100,20 Q80,30 60,20 Q40,10 20,20 Q0,30 0,50 Z" 
+                fill="#8B0000"/>
+        </svg>
+      </div>
     </div>
   );
 };
