@@ -64,14 +64,14 @@ const LocationSection: React.FC = () => {
           <div className="inline-flex rounded-2xl bg-beige p-1 shadow-lg border border-red-100">
             <button
               onClick={() => setActiveTab('ceremony')}
-              className={`px-6 py-3 rounded-xl font-montserrat font-medium transition-all duration-300 flex items-center ${activeTab === 'ceremony' ? 'bg-red-600 text-beige shadow-md' : 'text-red-700 hover:bg-red-100'}`}
+              className={`px-6 py-3 rounded-xl font-montserrat font-medium transition-all duration-300 flex items-center ${activeTab === 'ceremony' ? 'bg-red-100 text-beige shadow-md' : 'text-red-700 hover:bg-red-100'}`}
             >
               <Heart className="w-4 h-4 mr-2" />
               Ceremonia
             </button>
             <button
               onClick={() => setActiveTab('reception')}
-              className={`px-6 py-3 rounded-xl font-montserrat font-medium transition-all duration-300 flex items-center ${activeTab === 'reception' ? 'bg-red-600 text-beige shadow-md' : 'text-red-700 hover:bg-red-100'}`}
+              className={`px-6 py-3 rounded-xl font-montserrat font-medium transition-all duration-300 flex items-center ${activeTab === 'reception' ? 'bg-red-100 text-beige shadow-md' : 'text-red-700 hover:bg-red-100'}`}
             >
               <Gift className="w-4 h-4 mr-2" />
               Recepción
@@ -97,7 +97,7 @@ const LocationSection: React.FC = () => {
                     </h3>
                     <button
                       onClick={handleOpenMap}
-                      className="px-6 py-3 bg-red-600 text-beige rounded-xl font-montserrat font-semibold hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center"
+                      className="px-6 py-3 bg-red-200 text-beige rounded-xl font-montserrat font-semibold hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center"
                     >
                       <MapPin className="w-4 h-4 mr-2" />
                       Ver en Google Maps

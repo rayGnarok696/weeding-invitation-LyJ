@@ -136,7 +136,7 @@ const RSVPSection: React.FC = () => {
               <div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
                 <button
                   type="submit"
-                  className="px-8 py-4 bg-red-600 text-beige rounded-lg font-montserrat font-semibold hover:bg-red-700 transition-colors flex items-center justify-center"
+                  className="px-8 py-4 bg-red-100 text-beige rounded-lg font-montserrat font-semibold hover:bg-red-700 transition-colors flex items-center justify-center"
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
                   Enviar por WhatsApp

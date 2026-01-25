@@ -175,7 +175,7 @@ const FamilySection: React.FC = () => {
                     {[parents.bride, parents.groom].map((group, i) => (
                         <div key={i} className="bg-beige rounded-2xl shadow-xl p-8 border border-red-100">
                             <div className="text-center mb-8">
-                                <div className="inline-flex w-16 h-16 items-center justify-center rounded-full bg-red-600 text-beige mb-4">
+                                <div className="inline-flex w-16 h-16 items-center justify-center rounded-full bg-red-100 text-beige mb-4">
                                     {i === 0 ? <Sparkles /> : <Crown />}
                                 </div>
                                 <h4 className="font-playfair text-2xl text-red-800">
