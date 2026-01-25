@@ -55,37 +55,37 @@ const ItinerarySection: React.FC = () => {
   ];
 
   return (
-    <section id="itinerario" className="py-12 md:py-20 px-4 bg-gradient from-beige to-beige/95">
+    <section id="itinerario" className="py-12 md:py-16 px-4 bg-gradient from-beige to-beige/95">
       <div className="max-w-6xl mx-auto">
         {/* Encabezado inspirado en la imagen */}
-        <div className="text-center mb-12 md:mb-8">
-          <div className="inline-block px-6 md:px-8 py-2 md:py-3 mb-4 md:mb-6 bg-red-100 rounded-full">
+        <div className="text-center mb-8 md:mb-10">
+          <div className="inline-block px-6 md:px-8 py-2 md:py-3 mb-3 md:mb-4 bg-red-100 rounded-full">
             <Calendar className="inline-block w-5 h-5 md:w-6 md:h-6 text-red-700 mr-2" />
             <span className="font-montserrat font-semibold text-red-700 tracking-wider text-sm md:text-base">
               EL GRAN DÍA
             </span>
           </div>
 
-          <h2 className="font-playfair text-4xl md:text-5xl lg:text-6xl text-red-800 mb-4 md:mb-6 relative">
+          <h2 className="font-playfair text-4xl md:text-5xl lg:text-6xl text-red-800 mb-3 md:mb-4 relative">
             <span className="relative">
               ITINERARIO
-              <div className="absolute -bottom-2 md:-bottom-4 left-1/2 transform -translate-x-1/2 w-16 md:w-24 h-0.5 md:h-1 bg-red-600"></div>
+              <div className="absolute -bottom-2 md:-bottom-3 left-1/2 transform -translate-x-1/2 w-16 md:w-24 h-0.5 md:h-1 bg-red-600"></div>
             </span>
           </h2>
 
-          <p className="font-montserrat text-base md:text-lg text-red-700/80 max-w-2xl mx-auto mt-6 md:mt-8 px-4">
+          <p className="font-montserrat text-base md:text-lg text-red-700/80 max-w-2xl mx-auto mt-4 md:mt-6 px-4">
             Te invitamos a compartir cada momento especial de nuestra celebración.
             Cada detalle ha sido pensado con amor para crear recuerdos inolvidables.
           </p>
         </div>
 
         {/* Timeline - Versión móvil mejorada */}
-        <div className="relative mb-16 md:mb-20">
+        <div className="relative">
           {/* Línea del tiempo vertical - Solo desktop */}
           <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-red-300 to-red-200"></div>
 
           {/* Eventos */}
-          <div className="space-y-12 md:space-y-8">
+          <div className="space-y-10 md:space-y-8">
             {events.map((event, index) => (
               <div key={index} className="relative">
                 {/* Versión móvil - Diseño vertical */}
@@ -163,13 +163,6 @@ const ItinerarySection: React.FC = () => {
                     )}
                   </div>
                 </div>
-
-                {/* Descripción para eventos pares en desktop */}
-                {index % 2 === 0 && (
-                  <div className="hidden md:block md:w-1/2 md:pl-12 md:ml-auto">
-                    {/* Ya se muestra en el lado izquierdo */}
-                  </div>
-                )}
               </div>
             ))}
           </div>
