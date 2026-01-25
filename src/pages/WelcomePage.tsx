@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import selloCera from '../assets/sobre/selloCera.png';
+import selloCera from '../assets/sobre/sello6.png';
 import sobre from '../assets/sobre/sobre.png';
 
 const WelcomePage = () => {
@@ -106,26 +106,18 @@ const WelcomePage = () => {
                 />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div
-                    className="text-white tracking-wider"
+                    className="text-red-700 tracking-wider"
                     style={{
                       fontFamily: "Great Vibes, cursive",
                       fontWeight: 400,
-                      fontSize: '1.5rem',
-                      textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+                      fontSize: '0.8rem',
+                      textShadow: '1px 1px 1px rgba(0, 0, 0, 0.5)',
                     }}
                   >
                     L&J
                   </div>
                 </div>
-              </div>
-              
-              {/* Efecto de brillo sutil en el sello */}
-              <div className="absolute inset-0 rounded-full opacity-30"
-                   style={{
-                     background: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8) 0%, rgba(178,34,34,0.3) 70%)',
-                     mixBlendMode: 'overlay',
-                   }}
-              />
+              </div>              
             </motion.button>
           )}
         </motion.div>

@@ -9,7 +9,6 @@ const ItinerarySection: React.FC = () => {
       title: "Ceremonia Religiosa",
       subtitle: "Parroquia de Nuestra Señora del Refugio",
       icon: <Church className="w-6 h-6" />,
-      description: "Comienzo de nuestra unión en la hermosa Parroquia",
       color: "bg-red-50",
       borderColor: "border-red-300"
     },
@@ -24,6 +23,7 @@ const ItinerarySection: React.FC = () => {
     {
       time: "4:00 PM",
       title: "Llegada a la barda",
+      subtitle: "Barda Villa Victoria",
       icon: <DoorOpen className="w-6 h-6" />,
       color: "bg-red-50",
       borderColor: "border-red-300"
@@ -33,16 +33,14 @@ const ItinerarySection: React.FC = () => {
       title: "Comida",
       subtitle: "TACOS",
       icon: <HandCoins className="w-6 h-6" />,
-      description: "Acompañanos a la comida con todos nuestros seres queridos",
       color: "bg-red-100/20",
       borderColor: "border-red-200"
     },
     {
       time: "6:00 PM",
-      title: "Bals",
+      title: "Vals",
       subtitle: "Pista de Baile",
       icon: <Users2Icon className="w-6 h-6" />,
-      description: "Acompañanos en este hermoso bals",
       color: "bg-red-50",
       borderColor: "border-red-300"
     },
@@ -51,7 +49,6 @@ const ItinerarySection: React.FC = () => {
       title: "Baile",
       subtitle: "Pista de Baile",
       icon: <PartyPopper className="w-6 h-6" />,
-      description: "Música, baile y celebración hasta la madrugada",
       color: "bg-red-100/20",
       borderColor: "border-red-200"
     }
@@ -118,7 +115,6 @@ const ItinerarySection: React.FC = () => {
                         <MapPin className="w-3 h-3 md:w-4 md:h-4 mr-2 flex-shrink-0" />
                         <span className="text-sm md:text-base">{event.subtitle}</span>
                       </div>
-                      <p className="font-montserrat text-sm text-red-700/80 mt-2">{event.description}</p>
                     </div>
                   </div>
                 </div>
@@ -163,7 +159,6 @@ const ItinerarySection: React.FC = () => {
                           <MapPin className="w-4 h-4 mr-2" />
                           {event.subtitle}
                         </div>
-                        <p className="font-montserrat text-red-700/80">{event.description}</p>
                       </div>
                     )}
                   </div>

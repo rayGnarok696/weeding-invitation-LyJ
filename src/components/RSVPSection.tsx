@@ -32,7 +32,7 @@ const RSVPSection: React.FC = () => {
     ${formData.message ? `- Mensaje: ${formData.message}` : ''}`;
 
     const encodedMessage = encodeURIComponent(message);
-    const whatsappURL = `https://wa.me/524622462457?text=${encodedMessage}`;
+    const whatsappURL = `https://wa.me/524621485872?text=${encodedMessage}`;
 
     // Abrir WhatsApp
     window.open(whatsappURL, '_blank');
@@ -60,7 +60,7 @@ const RSVPSection: React.FC = () => {
             <h2 className="font-playfair text-4xl text-red-800">Confirmación</h2>
           </div>
           <p className="font-montserrat text-xl text-red-700 max-w-3xl mx-auto mb-2">
-            Confirma tu asistencia antes del 5 de Febrero de 2026
+            Confirma tu asistencia antes del 7 de Febrero de 2026
           </p>
           <p className="font-montserrat text-red-700">
             Por favor, completa el siguiente formulario o contáctanos por WhatsApp
@@ -80,7 +80,7 @@ const RSVPSection: React.FC = () => {
               </p>
               <p className="font-montserrat text-red-700 mt-4">
                 Si no se abrió WhatsApp automáticamente, puedes enviar tu mensaje manualmente al:
-                <a href="https://wa.me/524622462457" className="text-red-600 hover:underline ml-1">55 462 2462457</a>
+                <a href="https://wa.me/524621485872" className="text-red-600 hover:underline ml-1">554621485872</a>
               </p>
             </div>
           ) : (
@@ -145,7 +145,7 @@ const RSVPSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    const phoneNumber = "524622462457";
+                    const phoneNumber = "524621485872";
                     const message = "¡Hola Luli y Juan! Quiero confirmar mi asistencia a su boda.";
                     window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
                   }}
@@ -157,8 +157,6 @@ const RSVPSection: React.FC = () => {
             </form>
           )}
         </div>
-
-
       </div>
     </section>
   );
