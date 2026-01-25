@@ -63,7 +63,7 @@ const HeroSection: React.FC = () => {
       <div className="relative z-10 w-full px-4">
         {/* Nombre de los novios en la parte superior */}
         <div className="text-center pt-8 md:pt-12">
-          <div className="text-5xl md:text-7xl mb-50 text-amber-50 great-vibes-regular leading-tight">
+          <div className="text-5xl md:text-7xl mb-50 text-red-100 great-vibes-regular leading-tight">
             Lourdes & Juan
           </div>
         </div>
@@ -76,7 +76,7 @@ const HeroSection: React.FC = () => {
             <div className="flex items-center justify-center mb-6">
               <div className="w-16 h-0.5 bg-white/60" />
               <div className="mx-4">
-                <span className="font-mandarine text-2xl md:text-3xl text-amber-50 italic">
+                <span className="font-mandarine text-2xl md:text-3xl text-red-200 italic">
                   Nuestra Boda
                 </span>
               </div>
@@ -85,14 +85,14 @@ const HeroSection: React.FC = () => {
 
             {/* Fecha */}
             <div className="mb-6">
-              <h2 className="font-playfair text-3xl md:text-4xl text-amber-50 text-center font-semibold">
+              <h2 className="font-playfair text-3xl md:text-4xl text-red-200 text-center font-semibold">
                 14 de Febrero, 2026
               </h2>
             </div>
 
             {/* Texto pequeño */}
             <div>
-              <p className="font-montserrat text-sm md:text-base text-white/90 text-center uppercase tracking-widest">
+              <p className="font-montserrat text-sm md:text-base text-red-200 text-center uppercase tracking-widest">
                 ¡guarda la fecha!
               </p>
             </div>
