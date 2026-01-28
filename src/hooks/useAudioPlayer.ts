@@ -19,8 +19,12 @@ export const useAudioPlayer = (src: string, autoplay = false) => {
     }
 
     return () => {
-      audioRef.current?.pause();
-      audioRef.current = null;
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = "";   // 🔥 libera Media Session
+        audioRef.current.load();     // 🔥 fuerza descarga
+        audioRef.current = null;
+      }
     };
   }, [src, autoplay]);
 
