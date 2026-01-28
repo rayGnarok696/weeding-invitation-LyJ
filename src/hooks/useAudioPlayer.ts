@@ -4,44 +4,69 @@ export const useAudioPlayer = (src: string, autoplay = false) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
+  // Crear audio una sola vez por src
   useEffect(() => {
-    audioRef.current = new Audio(src);
-    audioRef.current.loop = true;
+    const audio = new Audio(src);
+    audio.loop = true;
+    audioRef.current = audio;
 
     if (autoplay) {
-      audioRef.current
-        .play()
+      audio.play()
         .then(() => setIsPlaying(true))
-        .catch(() => {
-          // Autoplay bloqueado si el navegador lo decide
-          setIsPlaying(false);
-        });
+        .catch(() => setIsPlaying(false));
     }
 
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.src = "";   // 🔥 libera Media Session
-        audioRef.current.load();     // 🔥 fuerza descarga
-        audioRef.current = null;
+    // 🔴 Al cerrar pestaña / navegador
+    const handleBeforeUnload = () => {
+      audio.pause();
+      audio.src = "";
+      audio.load();
+    };
+
+    // 🔴 Al salir / volver a la pestaña
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        // Usuario se fue → matar sesión
+        audio.pause();
+        audio.src = "";
+        audio.load();
+        setIsPlaying(false);
+      } else {
+        // Usuario volvió → reproducir otra vez
+        audio.src = src;
+        audio.loop = true;
+        audio.play()
+          .then(() => setIsPlaying(true))
+          .catch(() => setIsPlaying(false));
       }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+
+      audio.pause();
+      audio.src = "";
+      audio.load();
+      audioRef.current = null;
     };
   }, [src, autoplay]);
 
   const togglePlay = () => {
-    if (!audioRef.current) return;
+    const audio = audioRef.current;
+    if (!audio) return;
 
-    if (audioRef.current.paused) {
-      audioRef.current.play();
+    if (audio.paused) {
+      audio.play();
       setIsPlaying(true);
     } else {
-      audioRef.current.pause();
+      audio.pause();
       setIsPlaying(false);
     }
   };
 
-  return {
-    isPlaying,
-    togglePlay,
-  };
+  return { isPlaying, togglePlay };
 };
